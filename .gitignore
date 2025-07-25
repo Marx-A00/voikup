@@ -66,3 +66,9 @@ node_modules/
 # tasks/
 .taskmaster/
 .cursor/ 
+.env.example
+.mcp.json
+CLAUDE.md
+Voikup_Phase1_PRD.md
+src/env.js
+.claude/settings.local.json

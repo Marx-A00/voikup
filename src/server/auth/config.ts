@@ -1,7 +1,9 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import type { DefaultSession, NextAuthConfig } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import EmailProvider from "next-auth/providers/email";
+import chalk from "chalk";
 
+import { env } from "@/env";
 import { db } from "@/server/db";
 
 /**
@@ -32,16 +34,23 @@ declare module "next-auth" {
  */
 export const authConfig = {
 	providers: [
-		DiscordProvider,
-		/**
-		 * ...add more providers here.
-		 *
-		 * Most other providers require a bit more work than the Discord provider. For example, the
-		 * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-		 * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-		 *
-		 * @see https://next-auth.js.org/providers/github
-		 */
+		EmailProvider({
+			server: {
+				host: env.EMAIL_SERVER_HOST || "localhost",
+				port: env.EMAIL_SERVER_PORT || 1025,
+				auth: {
+					user: env.EMAIL_SERVER_USER || "",
+					pass: env.EMAIL_SERVER_PASSWORD || "",
+				},
+			},
+			from: env.EMAIL_FROM || "noreply@voikup.com",
+			sendVerificationRequest({ identifier: email, url }) {
+				console.log(chalk.cyan.bold("✨ === Magic Link Email === ✨"));
+				console.log(chalk.green(`📧 To: ${chalk.yellow(email)}`));
+				console.log(chalk.blue(`🔗 Sign in link: ${chalk.magenta(url)}`));
+				console.log(chalk.cyan.bold("================================"));
+			},
+		}),
 	],
 	adapter: PrismaAdapter(db),
 	callbacks: {
@@ -52,5 +61,10 @@ export const authConfig = {
 				id: user.id,
 			},
 		}),
+	},
+	pages: {
+		signIn: "/auth/signin",
+		verifyRequest: "/auth/verify-request",
+		error: "/auth/error",
 	},
 } satisfies NextAuthConfig;
