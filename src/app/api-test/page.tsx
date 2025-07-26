@@ -16,11 +16,15 @@ export default function ApiTest() {
 	const userStats = api.user.getStats.useQuery(undefined, {
 		enabled: !!session.data?.user,
 	});
+	const userProfile = api.user.getProfile.useQuery(undefined, {
+		enabled: !!session.data?.user,
+	});
 
 	// Mutations
 	const updateProfile = api.user.updateProfile.useMutation({
 		onSuccess: () => {
 			currentUser.refetch();
+			userProfile.refetch();
 			setName("");
 		},
 	});
@@ -145,6 +149,29 @@ export default function ApiTest() {
 								<p>
 									Account Created:{" "}
 									{new Date(userStats.data.accountCreated).toLocaleDateString()}
+								</p>
+							</div>
+						) : null}
+					</div>
+				)}
+
+				{/* Get Profile Test (Protected) */}
+				{session.data?.user && (
+					<div className="mb-8 rounded-xl bg-white/10 p-6">
+						<h2 className="mb-4 font-bold text-2xl">Get Profile (New)</h2>
+						{userProfile.isLoading ? (
+							<p>Loading...</p>
+						) : userProfile.error ? (
+							<p className="text-red-400">Error: {userProfile.error.message}</p>
+						) : userProfile.data ? (
+							<div className="space-y-2">
+								<p>ID: {userProfile.data.id}</p>
+								<p>Email: {userProfile.data.email}</p>
+								<p>Name: {userProfile.data.name || "Not set"}</p>
+								<p>Image: {userProfile.data.image || "Not set"}</p>
+								<p>
+									Email Verified:{" "}
+									{userProfile.data.emailVerified ? "Yes" : "No"}
 								</p>
 							</div>
 						) : null}

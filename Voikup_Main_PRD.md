@@ -76,12 +76,14 @@ Create a SaaS platform that:
 ```ts
 id: string (uuid)
 email: string
-phoneNumber: string
-preferredCallTime: string
-script: string
+name: string (optional)
 isSubscribed: boolean
 stripeCustomerId: string
 createdAt, updatedAt
+// Phone and call fields added in Phase 3:
+// phoneNumber: string
+// preferredCallTime: string
+// script: string
 ```
 
 ### `Call`
@@ -209,33 +211,39 @@ POST https://api.vapi.ai/v1/calls
 
 ---
 
-## Phase 2: User Dashboard & Profile (Week 2)
+## Phase 2: User Dashboard & Basic Profile (Week 2)
 ### Goals
-- Build core user experience
-- Allow users to configure their calls
+- Build core dashboard structure
+- Create basic user profile management
 
 ### Tasks
-- [ ] Create dashboard layout
-- [ ] Build phone number input with validation
-- [ ] Add preferred call time selector
-- [ ] Create custom message/script editor
-- [ ] Implement tRPC procedures for user data
+- [ ] Create dashboard layout with navigation
+- [ ] Build user profile page (name, email display)
+- [ ] Add profile edit functionality
+- [ ] Create settings page structure
+- [ ] Implement tRPC procedures for profile data
 - [ ] Add form persistence
 - [ ] Use React Query for data fetching
 
 ### Deliverables
-- Complete user dashboard
-- Users can set phone, time, and message
+- Complete dashboard structure
+- Basic user profile management
+- Settings page ready for Phase 3 features
 - Data persists via tRPC + Prisma
 
 ---
 
-## Phase 3: Vapi Integration (Week 3)
+## Phase 3: Vapi Integration & Call Configuration (Week 3)
 ### Goals
+- Add phone and call configuration to user profile
 - Integrate voice calling functionality
 - Test basic outbound calls
 
 ### Tasks
+- [ ] Extend User model with phone/call fields (phoneNumber, preferredCallTime, script)
+- [ ] Build phone number input with validation
+- [ ] Add preferred call time selector
+- [ ] Create custom message/script editor
 - [ ] Set up Vapi account and API keys
 - [ ] Create Vapi assistant configuration
 - [ ] Build call triggering service
@@ -245,6 +253,7 @@ POST https://api.vapi.ai/v1/calls
 - [ ] Add call logging
 
 ### Deliverables
+- Users can configure phone, time, and message
 - Working Vapi integration
 - Ability to trigger test calls
 - Call logs stored in database

@@ -11,7 +11,7 @@ export default function SignIn() {
 		e.preventDefault();
 		setLoading(true);
 		try {
-			await signIn("email", { email, callbackUrl: "/" });
+			await signIn("email", { email, callbackUrl: "/dashboard" });
 		} catch (error) {
 			console.error("Sign in error:", error);
 			setLoading(false);

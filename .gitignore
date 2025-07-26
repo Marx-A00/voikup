@@ -61,9 +61,6 @@ node_modules/
 *.sw?
 # OS specific
 
-# Task files
-# tasks.json
-# tasks/
 .taskmaster/
 .cursor/ 
 .env.example
@@ -72,3 +69,7 @@ CLAUDE.md
 Voikup_Phase1_PRD.md
 src/env.js
 .claude/settings.local.json
+
+# Task files
+# tasks.json
+# tasks/ 

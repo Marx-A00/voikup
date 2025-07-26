@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 export default async function Dashboard() {
 	const session = await auth();
@@ -10,53 +11,84 @@ export default async function Dashboard() {
 		redirect("/auth/signin");
 	}
 
+	// Fetch user profile data
+	const userProfile = await api.user.getProfile();
+
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-			<div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-				<h1 className="font-extrabold text-5xl tracking-tight">
-					<span className="text-[hsl(280,100%,70%)]">Dashboard</span>
+		<div className="space-y-8 text-white">
+			{/* Welcome Section */}
+			<div>
+				<h1 className="font-bold text-3xl lg:text-4xl">
+					Welcome back{userProfile?.name ? `, ${userProfile.name}` : ""}!
 				</h1>
+				<p className="mt-2 text-white/70">Here's your dashboard overview</p>
+			</div>
 
-				<div className="w-full max-w-2xl space-y-8">
-					<div className="rounded-xl bg-white/10 p-6">
-						<h2 className="mb-4 font-bold text-2xl">Account Information</h2>
-						<div className="space-y-2 text-white/80">
-							<p>
-								<span className="font-semibold">Email:</span>{" "}
-								{session.user?.email}
-							</p>
-							<p>
-								<span className="font-semibold">User ID:</span>{" "}
-								{session.user?.id}
-							</p>
-							<p>
-								<span className="font-semibold">Name:</span>{" "}
-								{session.user?.name || "Not set"}
-							</p>
-						</div>
+			{/* Profile Completion Card */}
+			<div className="rounded-xl bg-white/10 p-6">
+				<h2 className="mb-4 font-semibold text-xl">Profile Completion</h2>
+				<div className="space-y-3">
+					<div className="flex items-center justify-between">
+						<span className="text-white/70">Email</span>
+						<span className="font-medium">{userProfile?.email}</span>
 					</div>
-
-					<div className="rounded-xl bg-white/10 p-6">
-						<h2 className="mb-4 font-bold text-2xl">Your Habits</h2>
-						<p className="text-white/60">Habit tracking coming soon...</p>
-					</div>
-
-					<div className="flex justify-center gap-4">
-						<Link
-							href="/"
-							className="rounded-full bg-white/10 px-8 py-3 font-semibold no-underline transition hover:bg-white/20"
-						>
-							Back to Home
-						</Link>
-						<Link
-							href="/api/auth/signout"
-							className="rounded-full bg-white/10 px-8 py-3 font-semibold no-underline transition hover:bg-white/20"
-						>
-							Sign out
-						</Link>
+					<div className="flex items-center justify-between">
+						<span className="text-white/70">Name</span>
+						<span className="font-medium">
+							{userProfile?.name || (
+								<Link
+									href="/dashboard/profile"
+									className="text-[hsl(280,100%,70%)] hover:underline"
+								>
+									Add name
+								</Link>
+							)}
+						</span>
 					</div>
 				</div>
+				{!userProfile?.name && (
+					<div className="mt-4 rounded-lg bg-[hsl(280,100%,70%)]/20 p-3">
+						<p className="text-[hsl(280,100%,70%)] text-sm">
+							Complete your profile to get the most out of Voikup
+						</p>
+					</div>
+				)}
 			</div>
-		</main>
+
+			{/* Quick Links */}
+			<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				<Link
+					href="/dashboard/profile"
+					className="rounded-xl bg-white/10 p-6 transition hover:bg-white/20"
+				>
+					<h3 className="mb-2 font-semibold">Edit Profile</h3>
+					<p className="text-sm text-white/70">
+						Update your personal information
+					</p>
+				</Link>
+				<Link
+					href="/dashboard/settings"
+					className="rounded-xl bg-white/10 p-6 transition hover:bg-white/20"
+				>
+					<h3 className="mb-2 font-semibold">Settings</h3>
+					<p className="text-sm text-white/70">Configure your preferences</p>
+				</Link>
+				<div className="rounded-xl bg-white/10 p-6 opacity-50">
+					<h3 className="mb-2 font-semibold">Voice Calls</h3>
+					<p className="text-sm text-white/70">Coming in Phase 3</p>
+				</div>
+			</div>
+
+			{/* Future Features Placeholder */}
+			<div className="rounded-xl bg-white/10 p-6">
+				<h2 className="mb-4 font-semibold text-xl">Coming Soon</h2>
+				<ul className="space-y-2 text-white/70">
+					<li>• Schedule automated wake-up calls</li>
+					<li>• Set gym reminder calls</li>
+					<li>• Track your accountability streak</li>
+					<li>• Customize your motivational messages</li>
+				</ul>
+			</div>
+		</div>
 	);
 }

@@ -4,10 +4,38 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 
 export const userRouter = createTRPCRouter({
+	// Get user profile data
+	getProfile: protectedProcedure.query(async ({ ctx }) => {
+		const user = await ctx.db.user.findUnique({
+			where: { id: ctx.session.user.id },
+			select: {
+				id: true,
+				email: true,
+				name: true,
+				image: true,
+				emailVerified: true,
+			},
+		});
+
+		if (!user) {
+			throw new TRPCError({
+				code: "NOT_FOUND",
+				message: "User not found",
+			});
+		}
+
+		return user;
+	}),
+
 	updateProfile: protectedProcedure
 		.input(
 			z.object({
-				name: z.string().min(1).max(100).optional(),
+				name: z
+					.string()
+					.min(1, "Name must be at least 1 character")
+					.max(50, "Name must be at most 50 characters")
+					.trim()
+					.optional(),
 				image: z.string().url().optional(),
 			}),
 		)
