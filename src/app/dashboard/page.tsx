@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { auth } from "@/server/auth";
 
@@ -16,22 +16,31 @@ export default async function Dashboard() {
 				<h1 className="font-extrabold text-5xl tracking-tight">
 					<span className="text-[hsl(280,100%,70%)]">Dashboard</span>
 				</h1>
-				
+
 				<div className="w-full max-w-2xl space-y-8">
 					<div className="rounded-xl bg-white/10 p-6">
 						<h2 className="mb-4 font-bold text-2xl">Account Information</h2>
 						<div className="space-y-2 text-white/80">
-							<p><span className="font-semibold">Email:</span> {session.user?.email}</p>
-							<p><span className="font-semibold">User ID:</span> {session.user?.id}</p>
-							<p><span className="font-semibold">Name:</span> {session.user?.name || "Not set"}</p>
+							<p>
+								<span className="font-semibold">Email:</span>{" "}
+								{session.user?.email}
+							</p>
+							<p>
+								<span className="font-semibold">User ID:</span>{" "}
+								{session.user?.id}
+							</p>
+							<p>
+								<span className="font-semibold">Name:</span>{" "}
+								{session.user?.name || "Not set"}
+							</p>
 						</div>
 					</div>
-					
+
 					<div className="rounded-xl bg-white/10 p-6">
 						<h2 className="mb-4 font-bold text-2xl">Your Habits</h2>
 						<p className="text-white/60">Habit tracking coming soon...</p>
 					</div>
-					
+
 					<div className="flex justify-center gap-4">
 						<Link
 							href="/"

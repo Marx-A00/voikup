@@ -1,29 +1,154 @@
-# Create T3 App
+# Voikup
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Your AI-powered accountability partner for better habits. Built with the [T3 Stack](https://create.t3.gg/).
 
-## What's next? How do I make an app with this?
+## Tech Stack
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Framework**: [Next.js 15](https://nextjs.org) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org) (Email Magic Links)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) with [Prisma](https://prisma.io)
+- **API**: [tRPC](https://trpc.io) for type-safe APIs
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Code Quality**: [Biome](https://biomejs.dev/) for linting/formatting
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Prerequisites
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- Node.js 18+ and pnpm
+- Docker or Podman (for local PostgreSQL)
+- A PostgreSQL database (local or cloud)
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/voikup.git
+cd voikup
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Set up environment variables
+
+Copy `.env.example` to `.env` and fill in your values:
+
+```bash
+cp .env.example .env
+```
+
+Required environment variables:
+
+- `AUTH_SECRET`: Run `npx auth secret` to generate
+- `DATABASE_URL`: PostgreSQL connection string
+
+### 4. Start the database
+
+For local development with Docker:
+
+```bash
+./start-database.sh
+```
+
+This will start a PostgreSQL container on port 5433.
+
+### 5. Set up the database
+
+Push the Prisma schema to your database:
+
+```bash
+pnpm db:push
+```
+
+### 6. Start the development server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3001](http://localhost:3001) to see the app.
+
+## Available Scripts
+
+```bash
+# Development
+pnpm dev          # Start dev server (port 3001)
+pnpm build        # Build for production
+pnpm start        # Start production server
+
+# Database
+pnpm db:push      # Push schema changes (development)
+pnpm db:generate  # Generate Prisma migrations
+pnpm db:migrate   # Apply migrations (production)
+pnpm db:studio    # Open Prisma Studio GUI
+
+# Code Quality
+pnpm check        # Run Biome linting
+pnpm check:write  # Run Biome with auto-fix
+pnpm typecheck    # TypeScript type checking
+```
+
+## Project Structure
+
+```text
+src/
+├── app/                    # Next.js App Router pages
+│   ├── api/               # API routes (auth, tRPC)
+│   ├── auth/              # Authentication pages
+│   ├── dashboard/         # Protected dashboard
+│   └── api-test/          # tRPC API testing page
+├── server/                # Backend logic
+│   ├── api/              # tRPC routers and procedures
+│   │   ├── routers/      # Feature routers (auth, user, health)
+│   │   ├── root.ts       # Root router
+│   │   └── trpc.ts       # tRPC context and middleware
+│   ├── auth/             # NextAuth configuration
+│   └── db.ts             # Prisma client
+└── trpc/                 # Frontend tRPC setup
+```
+
+## Features
+
+- ✅ Email magic link authentication
+- ✅ Protected routes and API endpoints
+- ✅ User profile management
+- ✅ Health check endpoint
+- ✅ Type-safe API with tRPC
+- ✅ Pre-commit hooks with Husky
+- ✅ Environment validation with Zod
+
+## Development Workflow
+
+1. The app uses Biome for code formatting and linting
+2. Pre-commit hooks automatically format code and check types
+3. Environment variables are validated on startup
+4. Magic link emails are logged to console in development
+
+## Testing the App
+
+1. Visit the homepage and click "Get Started"
+2. Enter your email to receive a magic link
+3. Check your terminal for the magic link URL
+4. Click the link to sign in
+5. Visit "/api-test" to test all API endpoints
 
 ## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- [T3 Stack Documentation](https://create.t3.gg/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [tRPC Documentation](https://trpc.io/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Deployment
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Follow the deployment guides for:
 
-## How do I deploy this?
+- [Vercel](https://create.t3.gg/en/deployment/vercel)
+- [Netlify](https://create.t3.gg/en/deployment/netlify)
+- [Docker](https://create.t3.gg/en/deployment/docker)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Remember to set up your production environment variables and database!

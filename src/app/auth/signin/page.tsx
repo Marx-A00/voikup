@@ -24,7 +24,10 @@ export default function SignIn() {
 				<h1 className="font-extrabold text-5xl tracking-tight">
 					Sign in to <span className="text-[hsl(280,100%,70%)]">Voikup</span>
 				</h1>
-				<form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
+				<form
+					onSubmit={handleSubmit}
+					className="flex w-full max-w-md flex-col gap-4"
+				>
 					<input
 						type="email"
 						value={email}

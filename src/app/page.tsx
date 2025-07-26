@@ -13,10 +13,10 @@ export default async function Home() {
 					<h1 className="font-extrabold text-5xl tracking-tight sm:text-[5rem]">
 						Welcome to <span className="text-[hsl(280,100%,70%)]">Voikup</span>
 					</h1>
-					
+
 					{!session ? (
 						<div className="flex flex-col items-center gap-6">
-							<p className="text-xl text-white/80">
+							<p className="text-white/80 text-xl">
 								Your AI-powered accountability partner for better habits
 							</p>
 							<Link
@@ -29,20 +29,25 @@ export default async function Home() {
 					) : (
 						<div className="flex flex-col items-center gap-6">
 							<div className="text-center">
-								<p className="text-2xl text-white mb-2">
-									Welcome back, <span className="font-bold">{session.user?.email}</span>!
+								<p className="mb-2 text-2xl text-white">
+									Welcome back,{" "}
+									<span className="font-bold">{session.user?.email}</span>!
 								</p>
-								<p className="text-white/60">
-									User ID: {session.user?.id}
-								</p>
+								<p className="text-white/60">User ID: {session.user?.id}</p>
 							</div>
-							
-							<div className="flex gap-4">
+
+							<div className="flex flex-wrap justify-center gap-4">
 								<Link
 									href="/dashboard"
 									className="rounded-full bg-[hsl(280,100%,70%)] px-8 py-3 font-semibold text-white no-underline transition hover:bg-[hsl(280,100%,60%)]"
 								>
 									Go to Dashboard
+								</Link>
+								<Link
+									href="/api-test"
+									className="rounded-full bg-[hsl(280,100%,70%)] px-8 py-3 font-semibold text-white no-underline transition hover:bg-[hsl(280,100%,60%)]"
+								>
+									Test API
 								</Link>
 								<Link
 									href="/api/auth/signout"
@@ -53,7 +58,7 @@ export default async function Home() {
 							</div>
 						</div>
 					)}
-					
+
 					<div className="mt-16 text-center text-white/60">
 						<p className="text-sm">
 							Test the authentication by clicking "Get Started" above

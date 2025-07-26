@@ -1,7 +1,7 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import chalk from "chalk";
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
-import chalk from "chalk";
 
 import { env } from "@/env";
 import { db } from "@/server/db";
