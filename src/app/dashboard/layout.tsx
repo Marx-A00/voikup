@@ -34,7 +34,7 @@ export default function DashboardLayout({
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	return (
-		<div className="flex min-h-screen bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+		<div className="flex min-h-screen bg-gradient-to-b from-[#FEFEFE] to-[#E2E2E2]">
 			{/* Mobile sidebar backdrop */}
 			{sidebarOpen && (
 				<button
@@ -47,7 +47,7 @@ export default function DashboardLayout({
 
 			{/* Sidebar */}
 			<div
-				className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-black/20 backdrop-blur-md transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${
+				className={`fixed inset-y-0 left-0 z-50 w-64 transform border-gray-200 border-r bg-white transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 ${
 					sidebarOpen ? "translate-x-0" : "-translate-x-full"
 				}`}
 			>
@@ -55,16 +55,14 @@ export default function DashboardLayout({
 					{/* Logo/Title */}
 					<div className="flex h-16 items-center justify-between px-6">
 						<Link href="/dashboard" className="flex items-center">
-							<span className="font-bold text-2xl text-[hsl(280,100%,70%)]">
-								Voikup
-							</span>
+							<span className="font-bold text-2xl text-black">Voikup</span>
 						</Link>
 						<button
 							type="button"
 							className="lg:hidden"
 							onClick={() => setSidebarOpen(false)}
 						>
-							<XMarkIcon className="h-6 w-6 text-white" />
+							<XMarkIcon className="h-6 w-6 text-gray-600" />
 						</button>
 					</div>
 
@@ -78,8 +76,8 @@ export default function DashboardLayout({
 									href={item.href}
 									className={`flex items-center gap-3 rounded-lg px-3 py-2 font-medium transition-colors ${
 										isActive
-											? "bg-[hsl(280,100%,70%)]/20 text-[hsl(280,100%,70%)]"
-											: "text-white/70 hover:bg-white/10 hover:text-white"
+											? "bg-[var(--color-accent-blue)]/20 text-[var(--color-accent-blue)]"
+											: "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
 									}`}
 									onClick={() => setSidebarOpen(false)}
 								>
@@ -91,10 +89,10 @@ export default function DashboardLayout({
 					</nav>
 
 					{/* Sign out link */}
-					<div className="border-white/10 border-t p-3">
+					<div className="border-gray-200 border-t p-3">
 						<Link
 							href="/api/auth/signout"
-							className="flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+							className="flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
 						>
 							Sign out
 						</Link>
@@ -105,18 +103,16 @@ export default function DashboardLayout({
 			{/* Main content */}
 			<div className="flex flex-1 flex-col">
 				{/* Mobile header */}
-				<div className="sticky top-0 z-40 flex h-16 items-center gap-4 bg-black/20 px-4 backdrop-blur-md lg:hidden">
+				<div className="sticky top-0 z-40 flex h-16 items-center gap-4 border-gray-200 border-b bg-white px-4 lg:hidden">
 					<button
 						type="button"
-						className="text-white"
+						className="text-gray-600"
 						onClick={() => setSidebarOpen(true)}
 					>
 						<Bars3Icon className="h-6 w-6" />
 					</button>
 					<div className="flex-1">
-						<span className="font-bold text-[hsl(280,100%,70%)] text-xl">
-							Voikup
-						</span>
+						<span className="font-bold text-black text-xl">Voikup</span>
 					</div>
 				</div>
 

@@ -14,25 +14,25 @@ export default async function Home() {
 
 	return (
 		<HydrateClient>
-			<main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+			<main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#FEFEFE] to-[#E2E2E2] text-gray-900">
 				<div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
 					<h1 className="font-extrabold text-5xl tracking-tight sm:text-[5rem]">
-						Welcome to <span className="text-[hsl(280,100%,70%)]">Voikup</span>
+						Welcome to <span className="text-black">Voikup</span>
 					</h1>
 
 					<div className="flex flex-col items-center gap-6">
-						<p className="text-white/80 text-xl">
+						<p className="text-gray-700 text-xl">
 							Your AI-powered accountability partner for better habits
 						</p>
 						<Link
 							href="/auth/signin"
-							className="rounded-full bg-[hsl(280,100%,70%)] px-10 py-3 font-semibold text-white no-underline transition hover:bg-[hsl(280,100%,60%)]"
+							className="rounded-full bg-[var(--color-accent-orange)] px-10 py-3 font-semibold text-white no-underline transition hover:bg-[var(--color-accent-orange-dark)]"
 						>
 							Get Started
 						</Link>
 					</div>
 
-					<div className="mt-16 text-center text-white/60">
+					<div className="mt-16 text-center text-gray-600">
 						<p className="text-sm">
 							Test the authentication by clicking "Get Started" above
 						</p>

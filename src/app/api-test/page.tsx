@@ -30,10 +30,11 @@ export default function ApiTest() {
 	});
 
 	return (
-		<main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] p-8 text-white">
+		<main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#FEFEFE] to-[#E2E2E2] p-8 text-white">
 			<div className="container max-w-4xl">
 				<h1 className="mb-8 font-extrabold text-4xl">
-					tRPC API <span className="text-[hsl(280,100%,70%)]">Test Page</span>
+					tRPC API{" "}
+					<span className="text-[var(--color-primary)]">Test Page</span>
 				</h1>
 
 				{/* Health Check */}
@@ -80,7 +81,7 @@ export default function ApiTest() {
 							<p className="mb-4">Not logged in</p>
 							<Link
 								href="/auth/signin"
-								className="inline-block rounded-lg bg-[hsl(280,100%,70%)] px-6 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,60%)]"
+								className="inline-block rounded-lg bg-[var(--color-primary)] px-6 py-2 font-semibold text-white transition hover:bg-[var(--color-primary-dark)]"
 							>
 								Sign In
 							</Link>
@@ -124,7 +125,7 @@ export default function ApiTest() {
 										type="button"
 										onClick={() => updateProfile.mutate({ name })}
 										disabled={!name || updateProfile.isPending}
-										className="rounded-lg bg-[hsl(280,100%,70%)] px-6 py-2 font-semibold text-white transition hover:bg-[hsl(280,100%,60%)] disabled:opacity-50"
+										className="rounded-lg bg-[var(--color-primary)] px-6 py-2 font-semibold text-white transition hover:bg-[var(--color-primary-dark)] disabled:opacity-50"
 									>
 										{updateProfile.isPending ? "Updating..." : "Update"}
 									</button>

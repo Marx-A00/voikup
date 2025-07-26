@@ -3,4 +3,40 @@
 @theme {
 	--font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* Custom colors */
+	--color-main: #b8dde8;
+	--color-main-dark: #9acbd8;
+	--color-main-light: #cfeaf1;
+
+	--color-accent-orange: #fe9903;
+	--color-accent-orange-dark: #e58900;
+	--color-accent-orange-light: #ffb84d;
+
+	--color-accent-blue: #00a1fe;
+	--color-accent-blue-dark: #0080cc;
+	--color-accent-blue-light: #4dbfff;
+}
+
+/* Toast animations */
+@keyframes slideIn {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOut {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(100%);
+		opacity: 0;
+	}
 }

@@ -19,10 +19,10 @@ export default function SignIn() {
 	};
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+		<main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#FEFEFE] to-[#E2E2E2] text-gray-900">
 			<div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
 				<h1 className="font-extrabold text-5xl tracking-tight">
-					Sign in to <span className="text-[hsl(280,100%,70%)]">Voikup</span>
+					Sign in to <span className="text-black">Voikup</span>
 				</h1>
 				<form
 					onSubmit={handleSubmit}
@@ -34,12 +34,12 @@ export default function SignIn() {
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder="Enter your email"
 						required
-						className="rounded-lg bg-white/10 px-4 py-3 text-white placeholder:text-white/50"
+						className="rounded-lg border border-gray-200 bg-[var(--color-main)]/20 px-4 py-3 text-gray-900 placeholder:text-gray-500"
 					/>
 					<button
 						type="submit"
 						disabled={loading}
-						className="rounded-lg bg-white/10 px-4 py-3 font-semibold transition hover:bg-white/20 disabled:opacity-50"
+						className="rounded-lg bg-[var(--color-accent-orange)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-orange-dark)] disabled:opacity-50"
 					>
 						{loading ? "Sending..." : "Send Magic Link"}
 					</button>
