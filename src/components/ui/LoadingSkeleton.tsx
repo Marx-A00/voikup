@@ -50,16 +50,20 @@ export function LoadingSkeleton({
 	if (variant === "text" && lines > 1) {
 		return (
 			<div className={`space-y-2 ${className}`} {...props}>
-				{Array.from({ length: lines }).map((_, index) => (
-					<div
-						key={`skeleton-line-${variant}-${lines}-${index}`}
-						className={`${baseClasses} ${variantClass}`}
-						style={{
-							width: index === lines - 1 ? "80%" : dimensions.width,
-							height: dimensions.height,
-						}}
-					/>
-				))}
+				{Array.from({ length: lines }).map((_, index) => {
+					const isLastLine = index === lines - 1;
+					return (
+						<div
+							// biome-ignore lint/suspicious/noArrayIndexKey: Static list with no reordering
+							key={index}
+							className={`${baseClasses} ${variantClass}`}
+							style={{
+								width: isLastLine ? "80%" : dimensions.width,
+								height: dimensions.height,
+							}}
+						/>
+					);
+				})}
 			</div>
 		);
 	}
